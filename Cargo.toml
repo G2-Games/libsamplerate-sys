@@ -1,6 +1,7 @@
 [package]
 authors = ["Frederick Gnodtke <frederick@gnodtke.net>"]
 build = "build.rs"
+edition = "2021"
 name = "libsamplerate-sys"
 description = "FFI bindings for libsamplerate"
 repository = "https://github.com/Prior99/libsamplerate-sys"
@@ -9,6 +10,7 @@ license = "BSD-2-Clause"
 version = "0.1.12"
 readme = "README.md"
 categories = ["multimedia::audio"]
+links = "samplerate"
 
 exclude = [
     ".*",

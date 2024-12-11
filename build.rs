@@ -1,5 +1,3 @@
-extern crate cmake;
-
 fn main() {
     let manifest_path = env!("CARGO_MANIFEST_DIR");
     let mut config = cmake::Config::new("libsamplerate");
@@ -29,11 +27,11 @@ fn main() {
     let mut path = config.build();
 
     if std::env::var("TARGET").unwrap().contains("msvc") {
-        path = path.join("build").join(config.get_profile());
+        path = path.join("build").join("src").join(config.get_profile());
     } else if std::env::var("TARGET").unwrap().contains("-ios") {
         path = path.join("build").join(format!("{}-iphoneos", config.get_profile()));
     } else {
-        path = path.join("build");
+        path = path.join("build").join("src");
     }
 
     println!("cargo:rustc-link-search=native={}", path.display());
