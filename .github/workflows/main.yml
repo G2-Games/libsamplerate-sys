@@ -19,14 +19,13 @@ jobs:
             os: windows-latest
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions-rs/toolchain@v1
+    - uses: dtolnay/rust-toolchain@stable
       with:
-        profile: minimal
         toolchain: ${{ matrix.toolchain }}-${{ matrix.toolchain-suffix }}
-        override: true
+    - uses: Swatinem/rust-cache@v2
     - run: |
         rustup show
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         submodules: true
     - run: |
