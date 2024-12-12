@@ -27,7 +27,12 @@ fn main() {
     let mut path = config.build();
 
     if std::env::var("TARGET").unwrap().contains("msvc") {
-        path = path.join("build").join("src").join(config.get_profile());
+        path = path.join("build").join("src");
+
+        // TODO: Detect if running in cargo-xwin, otherwise it doesn't build. This is a hack...
+        if !std::env::var("CARGO_ENCODED_RUSTFLAGS").unwrap().contains("cargo-xwin/xwin") {
+            path = path.join(config.get_profile());
+        }
     } else if std::env::var("TARGET").unwrap().contains("-ios") {
         path = path.join("build").join(format!("{}-iphoneos", config.get_profile()));
     } else {
